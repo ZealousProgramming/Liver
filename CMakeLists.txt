@@ -16,10 +16,13 @@ set(includes
 	# --- Core
 	"src/framework/core/common.h"
 	"src/framework/core/window.h"
+	"src/framework/core/game_instance.h"
 	"src/framework/core/application.h"
 	# --- Renderer
 	"src/framework/renderer/renderer.h" 
-	"src/framework/renderer/opengl/gl_renderer.h"
+	"src/framework/renderer/renderer_2d.h" 
+	"src/framework/renderer/renderer_backend.h" 
+	"src/framework/renderer/opengl/backend_gl.h"
 
 	# Game
 )
@@ -27,9 +30,14 @@ set(includes
 # Append all project source
 set(sources 
 	# Framework
+	# --- Core
 	"src/framework/core/window.cpp"
+	"src/framework/core/game_instance.cpp"
 	"src/framework/core/application.cpp"
-	"src/framework/renderer/opengl/gl_renderer.cpp"
+	# --- Renderer
+	"src/framework/renderer/opengl/backend_gl.cpp"
+	"src/framework/renderer/renderer.cpp"
+	"src/framework/renderer/renderer_2d.cpp"
 
 	# Game
 	"src/game/game_entry.cpp"

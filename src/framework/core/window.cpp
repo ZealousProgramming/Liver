@@ -1,7 +1,5 @@
 #include "window.h"
 
-#include <iostream>
-
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
@@ -10,14 +8,14 @@
 namespace Sellas {
 
 	bool Window::initialize() {
-		window_inst = glfwCreateWindow((int)width, (int)height, title, NULL, NULL);
+		native_window = glfwCreateWindow((int)width, (int)height, title, NULL, NULL);
 
-		if(!window_inst) {
+		if(!native_window) {
 			glfwTerminate();
 			return false;
 		}
 
-		glfwMakeContextCurrent(window_inst);
+		glfwMakeContextCurrent(native_window);
 
 		if(!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)){
 			std::cout << "[Sellas][Window]: GLAD initialization failed" << "\n";
@@ -29,20 +27,26 @@ namespace Sellas {
 
 	void Window::shutdown() {
 
-		glfwDestroyWindow(window_inst);
+		glfwDestroyWindow(native_window);
 	}
 
 	bool Window::should_close() {
-		return glfwWindowShouldClose(window_inst);
+		return glfwWindowShouldClose(native_window);
 	}
 
 	void Window::swap_buffers() {
-		glfwSwapBuffers(window_inst);
+		glfwSwapBuffers(native_window);
 	}
 	
+	void Window::set_size(const i16 new_width, const i16 new_height) {
+		width = new_width;
+		height = new_height;
+	}
+
 	void Window::change_title(const char* new_title) {
 		title = new_title;
 
 		// TODO(devon): Update the actual window frame
 	}
+
 }

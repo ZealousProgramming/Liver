@@ -1,6 +1,6 @@
 #pragma once
 
-namespace Sellas{
+namespace Sellas {
 	// Use for owning unique data
 	template<typename T>
 	using Owned = std::unique_ptr<T>;

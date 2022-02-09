@@ -1,23 +1,20 @@
 //#include "sellas.h"
 #include "../framework/sellas.h"
 
-#include <iostream>
-
 // ---- Forward Declarations ----
 void start();
+void cleanup();
 void tick(f32 delta_time);
 void render(f32 delta_time);
 
-int main() {
-	const i16 WINDOW_WIDTH = 640;
-	const i16 WINDOW_HEIGHT = 360;
-	const char* WINDOW_TITLE = "Sellas Application";
+int main(int argc, char** argv) {
+	constexpr i16 WINDOW_WIDTH = 640;
+	constexpr i16 WINDOW_HEIGHT = 360;
+	constexpr char* WINDOW_TITLE = "Sellas Application";
 
 	Sellas::Application* app = new Sellas::Application();
 
-	app->on_start_fn = &start;
-	app->on_tick_fn = &tick;
-	app->on_render_fn = &render;
+	app->setup_lifecycle_events(&start, &cleanup, &tick, &render);
 
 	if (!app->initialize(WINDOW_TITLE, WINDOW_WIDTH, WINDOW_HEIGHT)) {
 		std::cout << "[Game] ERROR: Application failed the initialize!\n";
@@ -36,10 +33,14 @@ void start() {
 	std::cout << "[Game] Starting game loop..\n";
 }
 
+void cleanup() {
+	std::cout << "[Game] Cleaning up..\n";
+}
+
 void tick(f32 delta_time) {
-	std::cout << "[Game] Ticking..\n";
+	//std::cout << "[Game] Ticking..\n";
 }
 
 void render(f32 delta_time) {
-	std::cout << "[Game] Rendering..\n";
+	//std::cout << "[Game] Rendering..\n";
 }

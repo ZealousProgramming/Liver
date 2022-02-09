@@ -27,10 +27,13 @@ namespace Sellas {
 			const i16 get_width() { return width; }
 			const i16 get_height() { return height;  }
 
+			GLFWwindow* get_native_window() { return native_window;  }
+
+			void set_size(const i16 new_width, const i16 new_height);
 			void change_title(const char* new_title);
 			
 		private:
-			GLFWwindow* window_inst;
+			GLFWwindow* native_window;
 			const char* title;
 			i16 width;
 			i16 height;

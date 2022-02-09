@@ -4,6 +4,8 @@
 #include <cstddef>
 #include <memory>
 #include <optional>
+#include <functional>
+#include <iostream>
 
 #include <type_traits>
 
