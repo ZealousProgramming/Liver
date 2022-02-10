@@ -3,6 +3,11 @@
 #include "core/common.h"
 #include "core/window.h"
 #include "core/application.h"
+#include "renderer/renderer_2d.h"
+
+using Sellas::Owned;
+using Sellas::Ref;
+using Sellas::Weak;
 
 using Sellas::i8;
 using Sellas::i16;

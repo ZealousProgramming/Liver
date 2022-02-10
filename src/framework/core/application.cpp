@@ -1,6 +1,6 @@
 #include "application.h"
-#include "window.h"
 
+#include "window.h"
 #include "../renderer/renderer.h"
 
 #include <GLFW/glfw3.h>
@@ -40,7 +40,8 @@ namespace Sellas {
 		glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 6);
 		glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
-		window = new Window(window_title, window_width, window_height);
+		window = std::make_unique<Window>(window_title, window_width, window_height);
+		//window = new Window(window_title, window_width, window_height);
 
 		if (!window->initialize()) {
 			std::cout << "[Sellas][Application] ERROR: Window failed to initialize!\n";
@@ -67,7 +68,8 @@ namespace Sellas {
 		Renderer::shutdown();
 
 		window->shutdown();
-		delete window;
+		window.release();
+		//delete window;
 
 		std::cout << "[Sellas][Application] Shutting down..\n";
 		glfwTerminate();

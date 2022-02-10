@@ -7,7 +7,7 @@ project ("SellasSandbox" LANGUAGES CXX C)
 set(cmake_cxx_standard 20)
 
 # Allow for all warnings
-add_compile_options(-DWall)
+add_compile_options(-DWall )
 
 # Append all project includes
 set(includes
@@ -16,13 +16,14 @@ set(includes
 	# --- Core
 	"src/framework/core/common.h"
 	"src/framework/core/window.h"
-	"src/framework/core/game_instance.h"
 	"src/framework/core/application.h"
 	# --- Renderer
 	"src/framework/renderer/renderer.h" 
 	"src/framework/renderer/renderer_2d.h" 
 	"src/framework/renderer/renderer_backend.h" 
 	"src/framework/renderer/opengl/backend_gl.h"
+	"src/framework/renderer/opengl/shader_gl.h"
+	"src/framework/renderer/opengl/shader_program_gl.h"
 
 	# Game
 )
@@ -32,10 +33,11 @@ set(sources
 	# Framework
 	# --- Core
 	"src/framework/core/window.cpp"
-	"src/framework/core/game_instance.cpp"
 	"src/framework/core/application.cpp"
 	# --- Renderer
 	"src/framework/renderer/opengl/backend_gl.cpp"
+	"src/framework/renderer/opengl/shader_gl.cpp"
+	"src/framework/renderer/opengl/shader_program_gl.cpp"
 	"src/framework/renderer/renderer.cpp"
 	"src/framework/renderer/renderer_2d.cpp"
 

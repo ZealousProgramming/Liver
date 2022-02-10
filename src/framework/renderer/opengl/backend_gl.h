@@ -3,10 +3,12 @@
 #include "../renderer_backend.h"
 
 namespace Sellas {
-	class GLRenderer : public RendererBackend {
+	class ShaderProgramGL;
+		
+	class RendererGL : public RendererBackend {
 		public:
-			GLRenderer() = default;
-			~GLRenderer() override = default;
+			RendererGL() = default;
+			~RendererGL() override;
 
 
 			bool initialize() const override;
@@ -17,5 +19,8 @@ namespace Sellas {
 
 			void draw() override;
 			void draw_indexed() override;
+		private:
+			// NOTE(devon): Stored as a Ref as it'll be owned by the Resource Handler at a later date.
+			Ref<ShaderProgramGL> default_shader_program;
 	};
 }

@@ -4,7 +4,6 @@
 #include <GLFW/glfw3.h>
 
 
-
 namespace Sellas {
 
 	bool Window::initialize() {
@@ -26,7 +25,6 @@ namespace Sellas {
 	}
 
 	void Window::shutdown() {
-
 		glfwDestroyWindow(native_window);
 	}
 

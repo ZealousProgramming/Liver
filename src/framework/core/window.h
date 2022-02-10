@@ -2,12 +2,12 @@
 
 #include "common.h"
 
-class GLFWwindow;
-
 /*
 	Abstraction for a desktop window.
 
 */
+
+class GLFWwindow;
 
 namespace Sellas {
 	class Window {
@@ -27,7 +27,7 @@ namespace Sellas {
 			const i16 get_width() { return width; }
 			const i16 get_height() { return height;  }
 
-			GLFWwindow* get_native_window() { return native_window;  }
+			GLFWwindow* get_native_window() const { return native_window; }
 
 			void set_size(const i16 new_width, const i16 new_height);
 			void change_title(const char* new_title);

@@ -1,6 +1,7 @@
 #pragma once
 
 #include "common.h"
+//#include "window.h"
 
 /*
 	The core of any Sellas program.
@@ -19,6 +20,8 @@ namespace Sellas {
 		public:
 			Application() = default;
 			~Application() = default;
+			Application(Application const&) = delete;
+			Application& operator=(Application const&) = delete;
 
 			bool initialize(const char* window_title, const i16 window_width, const i16 window_height);
 			void shutdown();
@@ -27,9 +30,10 @@ namespace Sellas {
 			void setup_lifecycle_events(std::function<void()> enter_fn, std::function<void()> exit_fn, std::function<void(f32)> tick_fn, std::function<void(f32)> render_fn);
 
 			// Getters
-			Window* get_window() { return window; }
+			Window& get_window() const { return *window.get(); }
 		private:
-			Window* window = nullptr;
+			//Window* window = nullptr;
+			Owned<Window> window;
 			
 			// Lifecycle event callbacks
 			std::function<void()> on_enter_fn;

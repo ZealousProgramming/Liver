@@ -24,7 +24,8 @@ namespace Sellas {
 	}
 
 	void Renderer::start_draw() {
-
+		Renderer2D::clear();
+		Renderer2D::clear_color(clear_r, clear_g, clear_b);
 	}
 
 	void Renderer::end_draw() {

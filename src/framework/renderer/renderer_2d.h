@@ -15,7 +15,11 @@ namespace Sellas {
 			
 			static void on_resize(const i16 x, const i16 y, const i16 width, const i16 height);
 
+			static void clear_color(const f32 r, const f32 g, const f32 b);
+			static void clear();
+
 			static void draw_quad();
+
 
 		private:
 			static RendererBackend* backend;

@@ -32,5 +32,9 @@ namespace Sellas {
 			static void on_resize(const i16 x, const i16 y, const i16 width, const i16 height);
 			
 			static RendererBackend::BackendAPI GetBackend() { return RendererBackend::GetBackend(); }
+		private:
+			static constexpr f32 clear_r = 0.91373f;// 0.87451f;
+			static constexpr f32 clear_g = 0.6f;
+			static constexpr f32 clear_b = 0.51765f;
 	};
 }
