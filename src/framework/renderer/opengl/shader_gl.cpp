@@ -8,17 +8,24 @@ namespace Sellas {
 	const char* vertex_shader_source = 
 		"#version 460 core\n"
 		"layout (location = 0) in vec3 in_position;\n"
+		"layout (location = 1) in vec3 in_color;\n"
+		"\n"
+		"out vec3 frag_color;"
+		"\n"
 		"void main()\n"
 		"{\n"
 		"   gl_Position = vec4(in_position.xyz, 1.0);\n"
+		"	frag_color = in_color;\n"
 		"}\0";
 
 	const char* fragment_shader_source = 
 		"#version 460 core\n"
 		"out vec4 out_color;\n"
+		"in vec3 frag_color;\n"
+		"\n"
 		"void main()\n"
 		"{\n"
-		"	out_color = vec4(0.45882f, 0.85098f, 0.94902f, 1.0f);\n"
+		"	out_color = vec4(frag_color, 1.0f);\n"
 		"}\n\0";
 	
 	// ---

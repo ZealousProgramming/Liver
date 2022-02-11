@@ -38,4 +38,19 @@ namespace Sellas {
 		
 	}
 
+	// Uniform Setters
+	void ShaderProgramGL::set_bool(const char* uniform_name, const bool value) const {
+		int location = glGetUniformLocation(handle, uniform_name);
+		glUniform1i(location, static_cast<int>(value));
+	}
+	
+	void ShaderProgramGL::set_int(const char* uniform_name, const i32 value) const {
+		int location = glGetUniformLocation(handle, uniform_name);
+		glUniform1i(location, value);
+	}
+
+	void ShaderProgramGL::set_float(const char* uniform_name, const f32 value) const {
+		int location = glGetUniformLocation(handle, uniform_name);
+		glUniform1f(location, value);
+	}
 }

@@ -8,10 +8,11 @@
 namespace Sellas {
 	// Data
 	f32 quad_vertices[] = {
-		 0.5f,   0.5f,  0.0f, // Top Right
-		 0.5f,  -0.5f,  0.0f, // Bottom Right
-		-0.5f,	-0.5f,  0.0f, // Bottom Left
-		-0.5f,	 0.5f,  0.0f  // Top Left
+		 // Position          // Color
+		 0.5f,   0.5f,  0.0f, 0.45882f, 0.85098f, 0.94902f, // Top Right
+		 0.5f,  -0.5f,  0.0f, 0.45882f, 0.85098f, 0.94902f, // Bottom Right
+		-0.5f,	-0.5f,  0.0f, 0.45882f, 0.85098f, 0.94902f, // Bottom Left
+		-0.5f,	 0.5f,  0.0f, 0.45882f, 0.85098f, 0.94902f, // Top Left
 	};
 
 	u32 quad_indices[] = {
@@ -98,17 +99,32 @@ namespace Sellas {
 		// offset - Where the start of the vertex data is in the buffer. For
 		// position, it'll be 0 since the first 12 bytes belong to our 
 		// positional data.
+
+		const i32 ATTRIBUTE_SIZE = 6; // 3 positions floats, 3 color floats
+
+		// Position
 		glVertexAttribPointer(
-			0,						// index
-			3,						// size
-			GL_FLOAT,				// type
-			GL_FALSE,				// should_normalize
-			3 * SIZE_F32,			// stride
-			static_cast<void*>(0)	// offset
+			0,							// index
+			3,							// size
+			GL_FLOAT,					// type
+			GL_FALSE,					// should_normalize
+			ATTRIBUTE_SIZE * SIZE_F32,	// stride
+			static_cast<void*>(0)		// offset
+		);
+
+		// Color
+		glVertexAttribPointer(
+			1,
+			3,
+			GL_FLOAT,
+			GL_FALSE,
+			ATTRIBUTE_SIZE * SIZE_F32,
+			reinterpret_cast<void*>(3 * SIZE_F32) // Color starts 3 floats in
 		);
 
 		// Enable the first vertex attribute to be used
 		glEnableVertexAttribArray(0);
+		glEnableVertexAttribArray(1);
 
 		// Unbind the vbo
 		glBindBuffer(GL_ARRAY_BUFFER, 0);
@@ -120,6 +136,7 @@ namespace Sellas {
 		glBindVertexArray(0);
 
 		//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+		//glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 
 		return true;
 	}
