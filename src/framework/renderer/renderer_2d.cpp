@@ -22,6 +22,18 @@ namespace Sellas {
 	void Renderer2D::draw_quad() {
 
 	}
+
+	void Renderer2D::start_draw() {
+		Renderer2D::backend->start_draw();
+	}
+
+	void Renderer2D::bind_shader() {
+		Renderer2D::backend->bind_shader();
+	}
+
+	void Renderer2D::submit() {
+		Renderer2D::backend->submit();
+	}
 	
 	void Renderer2D::on_resize(const i16 x, const i16 y, const i16 width, const i16 height) {
 		Renderer2D::backend->on_resize(x, y, width, height);

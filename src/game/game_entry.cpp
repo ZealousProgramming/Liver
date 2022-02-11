@@ -1,13 +1,6 @@
 //#include "sellas.h"
 #include "../framework/sellas.h"
 
-// Data
-f32 vertices[] = {
-	-0.5f,  -0.5f,  0.0f, // Vertex 1
-	 0.5f,  -0.5f,  0.0f, // Vertex 2
-	 0.0f,	 0.5f,  0.0f  // Vertex 3
-};
-
 // ---- Forward Declarations ----
 void start();
 void cleanup();

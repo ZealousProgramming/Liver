@@ -17,6 +17,11 @@ namespace Sellas {
 
 			static void clear_color(const f32 r, const f32 g, const f32 b);
 			static void clear();
+		
+			static void start_draw();
+			static void submit();
+			
+			static void bind_shader();
 
 			static void draw_quad();
 

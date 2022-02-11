@@ -104,10 +104,10 @@ namespace Sellas {
 	}
 
 	void Application::setup_lifecycle_events(
-		std::function<void()> enter_fn, 
-		std::function<void()> exit_fn, 
-		std::function<void(f32)> tick_fn,
-		std::function<void(f32)> render_fn
+		Func<void()> enter_fn, 
+		Func<void()> exit_fn, 
+		Func<void(f32)> tick_fn,
+		Func<void(f32)> render_fn
 	) {
 		on_enter_fn = enter_fn;
 		on_exit_fn = exit_fn;

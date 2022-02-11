@@ -12,7 +12,7 @@ namespace Sellas {
 			void shutdown();
 
 			void source();
-			void compile();
+			const bool compile();
 
 			u32 get_handle() const { return handle; }
 

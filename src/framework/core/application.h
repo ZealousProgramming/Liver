@@ -36,10 +36,10 @@ namespace Sellas {
 			Owned<Window> window;
 			
 			// Lifecycle event callbacks
-			std::function<void()> on_enter_fn;
-			std::function<void()> on_exit_fn;
-			std::function<void(f32)> on_tick_fn;
-			std::function<void(f32)> on_render_fn;
+			Func<void()> on_enter_fn;
+			Func<void()> on_exit_fn;
+			Func<void(f32)> on_tick_fn;
+			Func<void(f32)> on_render_fn;
 
 			f32 last_frame_time;
 

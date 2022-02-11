@@ -1,6 +1,10 @@
 #pragma once
 
 namespace Sellas {
+	// Function Pointer
+	template<typename T>
+	using Func = std::function<T>;
+
 	// Use for owning unique data
 	template<typename T>
 	using Owned = std::unique_ptr<T>;
@@ -15,6 +19,7 @@ namespace Sellas {
 
 	// Aliases for fixed types
 	// Named similiar to Rust's types.
+	using byte = unsigned char;
 	using i8 = int8_t;
 	using i16 = int16_t;
 	using i32 = int32_t;
