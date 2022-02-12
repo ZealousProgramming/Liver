@@ -3,6 +3,7 @@
 
 namespace Sellas {
 
+	// TODO(devon): Run an ifdef for the Graphics API defines
 	RendererBackend* Renderer2D::backend = new RendererGL();
 
 	bool Renderer2D::initialize() {

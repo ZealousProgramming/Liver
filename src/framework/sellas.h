@@ -3,8 +3,12 @@
 #include "core/common.h"
 #include "core/window.h"
 #include "core/application.h"
+#include "core/math/math.h"
 #include "renderer/renderer_2d.h"
+#include "renderer/texture.h"
 
+
+using Sellas::Option;
 using Sellas::Owned;
 using Sellas::Ref;
 using Sellas::Weak;

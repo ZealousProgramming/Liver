@@ -37,6 +37,10 @@ namespace Sellas {
 		}
 		
 	}
+			
+	const u32 ShaderProgramGL::get_uniform_location(const char* uniform_name) const {
+		return glGetUniformLocation(handle, uniform_name);
+	}
 
 	// Uniform Setters
 	void ShaderProgramGL::set_bool(const char* uniform_name, const bool value) const {
@@ -52,5 +56,10 @@ namespace Sellas {
 	void ShaderProgramGL::set_float(const char* uniform_name, const f32 value) const {
 		int location = glGetUniformLocation(handle, uniform_name);
 		glUniform1f(location, value);
+	}
+
+	void ShaderProgramGL::set_matrix4(const char* uniform_name, const glm::mat4& value) const {
+		int location = glGetUniformLocation(handle, uniform_name);
+		glUniformMatrix4fv(location, 1, GL_FALSE, &value[0][0]);
 	}
 }

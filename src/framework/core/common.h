@@ -5,6 +5,10 @@ namespace Sellas {
 	template<typename T>
 	using Func = std::function<T>;
 
+	// Optional
+	template<typename T>
+	using Option = std::optional<T>;
+
 	// Use for owning unique data
 	template<typename T>
 	using Owned = std::unique_ptr<T>;

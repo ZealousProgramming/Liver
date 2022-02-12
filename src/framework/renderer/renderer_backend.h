@@ -27,7 +27,7 @@ namespace Sellas {
 
 			virtual void draw_indexed() = 0;
 
-			
+			static void set_api(BackendAPI api) { RendererBackend::backend = api; }
 			static BackendAPI GetBackend() { return backend; }
 		private:
 			static BackendAPI backend;

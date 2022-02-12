@@ -2,17 +2,22 @@
 #include "shader_gl.h"
 #include "shader_program_gl.h"
 
+#include "../../core/math/math.h"
+
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
 namespace Sellas {
+
+	glm::mat4 transform = glm::mat4(1.0f);
+
 	// Data
 	f32 quad_vertices[] = {
-		 // Position          // Color
-		 0.5f,   0.5f,  0.0f, 0.45882f, 0.85098f, 0.94902f, // Top Right
-		 0.5f,  -0.5f,  0.0f, 0.45882f, 0.85098f, 0.94902f, // Bottom Right
-		-0.5f,	-0.5f,  0.0f, 0.45882f, 0.85098f, 0.94902f, // Bottom Left
-		-0.5f,	 0.5f,  0.0f, 0.45882f, 0.85098f, 0.94902f, // Top Left
+		 // Position          // Color		    // Texture Coords
+		 0.5f,   0.5f,  0.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, // Top Right
+		 0.5f,  -0.5f,  0.0f, 1.0f, 1.0f, 1.0f, 1.0f, 0.0f, // Bottom Right
+		-0.5f,	-0.5f,  0.0f, 1.0f, 1.0f, 1.0f, 0.0f, 0.0f, // Bottom Left
+		-0.5f,	 0.5f,  0.0f, 1.0f, 1.0f, 1.0f, 0.0f, 1.0f  // Top Left
 	};
 
 	u32 quad_indices[] = {
@@ -36,6 +41,8 @@ namespace Sellas {
 	}
 
 	const bool RendererGL::initialize() {
+		RendererBackend::set_api(RendererBackend::BackendAPI::OPEN_GL);
+
 		ShaderGL vertex_shader = ShaderGL();
 		ShaderGL fragment_shader = ShaderGL();
 
@@ -100,7 +107,7 @@ namespace Sellas {
 		// position, it'll be 0 since the first 12 bytes belong to our 
 		// positional data.
 
-		const i32 ATTRIBUTE_SIZE = 6; // 3 positions floats, 3 color floats
+		const i32 ATTRIBUTE_SIZE = 8; // 3 positions floats, 3 color floats, 2 texcoord floats
 
 		// Position
 		glVertexAttribPointer(
@@ -122,9 +129,20 @@ namespace Sellas {
 			reinterpret_cast<void*>(3 * SIZE_F32) // Color starts 3 floats in
 		);
 
+		// Texcoords
+		glVertexAttribPointer(
+			2,
+			2,
+			GL_FLOAT,
+			GL_FALSE,
+			ATTRIBUTE_SIZE * SIZE_F32,
+			reinterpret_cast<void*>(6 * SIZE_F32) // 3 pos + 3 color 
+		);
+
 		// Enable the first vertex attribute to be used
 		glEnableVertexAttribArray(0);
 		glEnableVertexAttribArray(1);
+		glEnableVertexAttribArray(2);
 
 		// Unbind the vbo
 		glBindBuffer(GL_ARRAY_BUFFER, 0);
@@ -137,6 +155,10 @@ namespace Sellas {
 
 		//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 		//glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+		glEnable(GL_DEPTH_TEST);
+		glEnable(GL_BLEND);
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
 
 		return true;
 	}
@@ -147,7 +169,15 @@ namespace Sellas {
 	
 	void RendererGL::start_draw() {
 		bind_shader();
+		
+		//transform = glm::translate(transform, glm::vec3(0.5f, -0.5f, 0.0f));
+		transform = glm::rotate(transform, (float)glfwGetTime() * 0.2f, glm::vec3(0.0f, 0.0, 1.0f));
+		
+		default_shader_program->set_matrix4("transform", transform);
+
+
 		bind_vao(vao);
+
 	}
 
 	void RendererGL::bind_shader() const {
@@ -159,7 +189,7 @@ namespace Sellas {
 	}
 
 	void RendererGL::clear() {
-		glClear(GL_COLOR_BUFFER_BIT);
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	}
 
 	void RendererGL::clear_color(const f32 r, const f32 g, const f32 b) {
