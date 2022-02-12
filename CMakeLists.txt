@@ -4,7 +4,8 @@
 cmake_minimum_required (VERSION 3.16)
 
 project ("SellasSandbox" LANGUAGES CXX C)
-set(cmake_cxx_standard 20)
+set(CMAKE_CXX_STANDARD 20)
+#set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++20")
 
 # Allow for all warnings
 add_compile_options(-DWall )
@@ -17,10 +18,13 @@ set(includes
 	"src/framework/core/common.h"
 	"src/framework/core/window.h"
 	"src/framework/core/application.h"
+	"src/framework/core/math/math.h"
 	# --- Renderer
 	"src/framework/renderer/renderer.h" 
 	"src/framework/renderer/renderer_2d.h" 
 	"src/framework/renderer/renderer_backend.h" 
+	"src/framework/renderer/texture.h"
+	"src/framework/renderer/opengl/texture_gl.h"
 	"src/framework/renderer/opengl/backend_gl.h"
 	"src/framework/renderer/opengl/shader_gl.h"
 	"src/framework/renderer/opengl/shader_program_gl.h"
@@ -35,9 +39,12 @@ set(sources
 	"src/framework/core/window.cpp"
 	"src/framework/core/application.cpp"
 	# --- Renderer
+	"src/framework/renderer/texture.cpp"
+	"src/framework/renderer/opengl/texture_gl.cpp"
 	"src/framework/renderer/opengl/backend_gl.cpp"
 	"src/framework/renderer/opengl/shader_gl.cpp"
 	"src/framework/renderer/opengl/shader_program_gl.cpp"
+	"src/framework/renderer/renderer_backend.cpp" 
 	"src/framework/renderer/renderer.cpp"
 	"src/framework/renderer/renderer_2d.cpp"
 
@@ -52,8 +59,10 @@ target_precompile_headers(${PROJECT_NAME} PUBLIC "src/framework/pch.h")
 # --------------------
 #  - Third Parties -
 # --------------------
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/src/framework/vendor/")
 
 # OpenGL
+# TODO(devon): Use defines to detemine if this needs to be skipped
 find_package(OpenGL REQUIRED)
 
 # GLFW
@@ -66,11 +75,15 @@ add_subdirectory("src/framework/vendor/glfw")
 # GLAD
 add_subdirectory("src/framework/vendor/glad")
 
+# GLM
+add_subdirectory("src/framework/vendor/glm")
+
 # Append all libs 
 set(libs 
 	opengl32
 	glfw
 	glad
+	glm
 )
 
 # Include directories
@@ -78,6 +91,7 @@ target_include_directories(${PROJECT_NAME}
 	PUBLIC
 		"src/framework/vendor/glfw/include"
 		"src/framework/vendor/glad/include"
+		"src/framework/vendor/glm"
 )
 
 # Link libraries

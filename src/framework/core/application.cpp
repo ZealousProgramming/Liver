@@ -7,6 +7,9 @@
 
 
 namespace Sellas {
+
+	void framebuffer_resize_callback(GLFWwindow* window_inst, int width, int height);
+
 	bool Application::initialize(const char* window_title, const i16 window_width, const i16 window_height) {
 		std::cout << "[Sellas][Application] Initializing..\n";
 

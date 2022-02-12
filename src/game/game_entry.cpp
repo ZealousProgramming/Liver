@@ -7,11 +7,14 @@ void cleanup();
 void tick(f32 delta_time);
 void render(f32 delta_time);
 
+// ---- Test Data
+Ref<Sellas::Texture> test_texture;
 
+// --- Functions
 int main(int argc, char** argv) {
 	constexpr i16 WINDOW_WIDTH = 640;
 	constexpr i16 WINDOW_HEIGHT = 360;
-	constexpr char* WINDOW_TITLE = "Sellas Application";
+	const char* WINDOW_TITLE = "Sellas Application";
 
 	Owned<Sellas::Application> app = std::make_unique<Sellas::Application>();
 
@@ -33,16 +36,28 @@ int main(int argc, char** argv) {
 
 void start() {
 	std::cout << "[Game] Starting game loop..\n";
+
+	if (auto texture = Sellas::Texture::create_texture()) {
+		test_texture = texture.value();
+		//test_texture->initialize("../../assets/textures/s_guy.png");
+		test_texture->initialize("../../../assets/textures/s_guy.png");
+	}
+
 }
 
 void cleanup() {
 	std::cout << "[Game] Cleaning up..\n";
+	test_texture->shutdown();
+	auto _count = test_texture.use_count();
 }
 
 void tick(f32 delta_time) {
 	//std::cout << "[Game] Ticking..\n";
+
 }
 
 void render(f32 delta_time) {
 	//std::cout << "[Game] Rendering..\n";
+	test_texture->bind();
+	
 }
