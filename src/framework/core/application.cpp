@@ -1,6 +1,8 @@
 #include "application.h"
 
 #include "window.h"
+#include "camera.h"
+#include "input.h"
 #include "../renderer/renderer.h"
 
 #include <GLFW/glfw3.h>
@@ -8,7 +10,11 @@
 
 namespace Sellas {
 
+	// --- Forward Declarations
 	void framebuffer_resize_callback(GLFWwindow* window_inst, int width, int height);
+
+	// --- Static Declarations
+	Application* Application::instance = nullptr;
 
 	bool Application::initialize(const char* window_title, const i16 window_width, const i16 window_height) {
 		std::cout << "[Sellas][Application] Initializing..\n";
@@ -64,6 +70,10 @@ namespace Sellas {
 		
 		last_frame_time = 0.0f;
 
+		Application::instance = this;
+		
+		Input::initialize();
+
 		return true;
 	}
 
@@ -92,7 +102,7 @@ namespace Sellas {
 			on_tick_fn(delta_time);
 
 			// Render
-			Renderer::start_draw();
+			Renderer::start_draw(*Camera::current_camera);
 			on_render_fn(delta_time);
 			Renderer::end_draw();
 			Renderer::submit();

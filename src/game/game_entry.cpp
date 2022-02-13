@@ -9,6 +9,8 @@ void render(f32 delta_time);
 
 // ---- Test Data
 Ref<Sellas::Texture> test_texture;
+Ref<Sellas::Camera> main_camera;
+f32 camera_speed = 10.0f;
 
 // --- Functions
 int main(int argc, char** argv) {
@@ -37,6 +39,8 @@ int main(int argc, char** argv) {
 void start() {
 	std::cout << "[Game] Starting game loop..\n";
 
+	main_camera = std::make_shared<Sellas::Camera>();
+
 	if (auto texture = Sellas::Texture::create_texture()) {
 		test_texture = texture.value();
 		//test_texture->initialize("../../assets/textures/s_guy.png");
@@ -53,7 +57,16 @@ void cleanup() {
 
 void tick(f32 delta_time) {
 	//std::cout << "[Game] Ticking..\n";
+	
+	f32 h_velocity = Sellas::Input::is_key_pressed(Sellas::Key::KEY_RIGHT) - 
+		Sellas::Input::is_key_pressed(Sellas::Key::KEY_LEFT);
 
+	f32 v_velocity = Sellas::Input::is_key_pressed(Sellas::Key::KEY_UP) - 
+		Sellas::Input::is_key_pressed(Sellas::Key::KEY_DOWN);
+
+	glm::vec3 velocity = glm::vec3(h_velocity, v_velocity, 0.0f) * delta_time;
+
+	main_camera->get_mut_transform().translate(velocity);
 }
 
 void render(f32 delta_time) {

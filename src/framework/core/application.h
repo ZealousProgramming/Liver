@@ -30,9 +30,11 @@ namespace Sellas {
 			void setup_lifecycle_events(std::function<void()> enter_fn, std::function<void()> exit_fn, std::function<void(f32)> tick_fn, std::function<void(f32)> render_fn);
 
 			// Getters
+			static Application& get_instance() { return *Application::instance; }
 			Window& get_window() const { return *window.get(); }
 		private:
 			//Window* window = nullptr;
+			static Application* instance;
 			Owned<Window> window;
 			
 			// Lifecycle event callbacks

@@ -8,8 +8,10 @@
 #include <GLFW/glfw3.h>
 
 namespace Sellas {
-
-	glm::mat4 transform = glm::mat4(1.0f);
+	
+	Transform model_transform = Transform();
+	//glm::mat4 model = glm::mat4(1.0f);
+	glm::mat4 projection = glm::mat4(1.0f);
 
 	// Data
 	f32 quad_vertices[] = {
@@ -159,6 +161,17 @@ namespace Sellas {
 		glEnable(GL_BLEND);
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
+		// - Test Data -
+		// -------------
+		f32 aspect_ratio = 1280.0f / 720.0f;
+		f32 fov = 60.0f;
+		f32 near_plane = 0.1f;
+		f32 far_plane = 100.0f;
+
+		//model = glm::rotate(model, glm::radians(-55.0f), glm::vec3(1.0f, 0.0f, 0.0f));
+		projection = glm::perspective(glm::radians(fov), aspect_ratio, near_plane, far_plane);
+		//model_transform.rotate_deg(30.0f, glm::vec3(1.0f, 1.0f, 0.0f));
+		model_transform.translate(glm::vec3(3.0f, 0.0f, 0.0f));
 
 		return true;
 	}
@@ -167,14 +180,12 @@ namespace Sellas {
 		glViewport(0, 0, new_width, new_height);
 	}
 	
-	void RendererGL::start_draw() {
+	void RendererGL::start_draw(const Camera& current_camera) {
 		bind_shader();
-		
-		//transform = glm::translate(transform, glm::vec3(0.5f, -0.5f, 0.0f));
-		transform = glm::rotate(transform, (float)glfwGetTime() * 0.2f, glm::vec3(0.0f, 0.0, 1.0f));
-		
-		default_shader_program->set_matrix4("transform", transform);
 
+		default_shader_program->set_matrix4("model", model_transform.get_matrix());
+		default_shader_program->set_matrix4("projection", projection);
+		default_shader_program->set_matrix4("view", current_camera.get_transform().get_matrix());
 
 		bind_vao(vao);
 

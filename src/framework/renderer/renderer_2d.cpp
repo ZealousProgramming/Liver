@@ -24,8 +24,8 @@ namespace Sellas {
 
 	}
 
-	void Renderer2D::start_draw() {
-		Renderer2D::backend->start_draw();
+	void Renderer2D::start_draw(const Camera& current_camera) {
+		Renderer2D::backend->start_draw(current_camera);
 	}
 
 	void Renderer2D::bind_shader() {

@@ -2,6 +2,7 @@
 
 #include "../core/common.h"
 #include "renderer_backend.h"
+#include "../core/camera.h"
 
 namespace Sellas {
 	/**
@@ -24,7 +25,7 @@ namespace Sellas {
 			static bool initialize();
 			static void shutdown();
 
-			static void start_draw();
+			static void start_draw(const Camera& current_camera);
 			static void end_draw();
 
 			static void submit();
