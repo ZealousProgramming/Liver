@@ -23,10 +23,10 @@ namespace Sellas {
 		Renderer2D::on_resize(x, y, width, height);
 	}
 
-	void Renderer::start_draw() {
+	void Renderer::start_draw(const Camera& current_camera) {
 		Renderer2D::clear_color(clear_r, clear_g, clear_b);
 		Renderer2D::clear();
-		Renderer2D::start_draw();
+		Renderer2D::start_draw(current_camera);
 	}
 
 	void Renderer::end_draw() {

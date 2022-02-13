@@ -13,7 +13,7 @@ namespace Sellas {
 	class Window {
 		public:
 			Window() = default;
-			Window(const char* window_title, i16 window_width, i16 window_height) : title(window_title), width(window_width), height(window_height) {}
+			Window(const char* window_title, i16 window_width, i16 window_height) : native_window(nullptr), title(window_title), width(window_width), height(window_height) {}
 			~Window() = default;
 			
 

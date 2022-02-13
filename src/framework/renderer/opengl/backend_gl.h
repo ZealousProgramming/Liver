@@ -17,7 +17,7 @@ namespace Sellas {
 			void clear() override;
 			void on_resize(const i16 x, const i16 y, const i16 new_width, const i16 new_height) override;
 
-			void start_draw() override;
+			void start_draw(const Camera& current_camera) override;
 			void submit() override;
 
 			void bind_shader() const override;

@@ -18,7 +18,10 @@ set(includes
 	"src/framework/core/common.h"
 	"src/framework/core/window.h"
 	"src/framework/core/application.h"
+	"src/framework/core/camera.h"
+	"src/framework/core/input.h"
 	"src/framework/core/math/math.h"
+	"src/framework/core/math/transform.h"
 	# --- Renderer
 	"src/framework/renderer/renderer.h" 
 	"src/framework/renderer/renderer_2d.h" 
@@ -38,6 +41,9 @@ set(sources
 	# --- Core
 	"src/framework/core/window.cpp"
 	"src/framework/core/application.cpp"
+	"src/framework/core/camera.cpp"
+	"src/framework/core/input.cpp"
+	"src/framework/core/math/transform.cpp"
 	# --- Renderer
 	"src/framework/renderer/texture.cpp"
 	"src/framework/renderer/opengl/texture_gl.cpp"
@@ -49,10 +55,10 @@ set(sources
 	"src/framework/renderer/renderer_2d.cpp"
 
 	# Game
-	"src/game/game_entry.cpp"
 )
 
-add_executable (${PROJECT_NAME} ${includes} ${sources})
+add_executable (${PROJECT_NAME} ${includes} ${sources}
+	"src/game/game_entry.cpp")
 
 target_precompile_headers(${PROJECT_NAME} PUBLIC "src/framework/pch.h")
 
@@ -95,7 +101,39 @@ target_include_directories(${PROJECT_NAME}
 )
 
 # Link libraries
-target_link_libraries(${PROJECT_NAME} ${libs})
+target_link_libraries(${PROJECT_NAME} 
+	${libs}
+)
 
 
+# -------------
+# testing
+# -------------
+enable_testing()
+set(CTEST_OUTPUT_ON_FAILURE=1)
 
+set(test_sources 
+	"src/framework/tests/main.cpp"
+	"src/framework/tests/test_input.cpp"
+)
+
+add_subdirectory("src/framework/vendor/googletest")
+include_directories("${gtest_SOURCE_DIR}/include" "${gtest_SOURCE_DIR}")
+
+add_executable(sellas_tests ${includes} ${sources} ${test_sources})
+
+target_precompile_headers(sellas_tests PUBLIC "src/framework/pch.h")
+target_include_directories(sellas_tests
+	PUBLIC
+		"src/framework/vendor/glfw/include"
+		"src/framework/vendor/glad/include"
+		"src/framework/vendor/glm"
+)
+target_link_libraries(sellas_tests 
+	${libs}
+	gtest
+	gtest_main
+)
+
+
+add_test(NAME "sellas_testing" COMMAND sellas_tests)
