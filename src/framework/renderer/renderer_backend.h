@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../core/common.h"
+#include "../../core/camera.h"
 
 namespace Sellas {
 	class RendererBackend {
@@ -20,7 +21,7 @@ namespace Sellas {
 			virtual void clear() = 0;
 			virtual void on_resize(const i16 x, const i16 y, const i16 new_width, const i16 new_height) = 0;
 			
-			virtual void start_draw() = 0;
+			virtual void start_draw(const Camera& current_camera) = 0;
 			virtual void submit() = 0;
 
 			virtual void bind_shader() const = 0;

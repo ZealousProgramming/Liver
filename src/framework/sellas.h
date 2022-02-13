@@ -3,6 +3,8 @@
 #include "core/common.h"
 #include "core/window.h"
 #include "core/application.h"
+#include "core/camera.h"
+#include "core/input.h"
 #include "core/math/math.h"
 #include "renderer/renderer_2d.h"
 #include "renderer/texture.h"

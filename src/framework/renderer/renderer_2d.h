@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../core/common.h"
+#include "../core/camera.h"
 
 namespace Sellas {
 	class RendererBackend;
@@ -18,7 +19,7 @@ namespace Sellas {
 			static void clear_color(const f32 r, const f32 g, const f32 b);
 			static void clear();
 		
-			static void start_draw();
+			static void start_draw(const Camera& current_camera);
 			static void submit();
 			
 			static void bind_shader();
