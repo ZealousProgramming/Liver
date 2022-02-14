@@ -3,7 +3,7 @@
 #include "application.h"
 #include "window.h"
 
-namespace Sellas {
+namespace Liver {
 	// --- Forward Declarations
 	void mouse_position_callback(GLFWwindow* window_inst, f64 x, f64 y);
 	void mouse_button_callback(GLFWwindow* window_inst, i32 button, i32 action, i32 mods);
@@ -155,18 +155,18 @@ namespace Sellas {
 
 	void mouse_position_callback(GLFWwindow* window_inst, f64 x, f64 y)
 	{
-		//std::cout << "[Sellas][Input][Mouse Position] x: " << x << ", y: " << y << "\n";
+		//std::cout << "[Liver][Input][Mouse Position] x: " << x << ", y: " << y << "\n";
 		Input::mouse_position.x = x;
 		Input::mouse_position.y = y;
 	}
 
 	void mouse_button_callback(GLFWwindow* window_inst, i32 button, i32 action, i32 mods) {
-		//std::cout << "[Sellas][Input][Mouse Button] button: " << button << " , action: " << action << ", mods: " << mods << "\n";
+		//std::cout << "[Liver][Input][Mouse Button] button: " << button << " , action: " << action << ", mods: " << mods << "\n";
 		// TODO(devon): Set the mouse button state
 	}
 	
 	void keyboard_callback(GLFWwindow* window_inst, i32 key, i32 scancode, i32 action, i32 mods) {
-		//std::cout << "[Sellas][Input][Keyboard] key: " << key <<", scancode: " << scancode << " , action: " << action << ", mods: " << mods << "\n";
+		//std::cout << "[Liver][Input][Keyboard] key: " << key <<", scancode: " << scancode << " , action: " << action << ", mods: " << mods << "\n";
 		
 		auto converted_key = (Key)key;
 		if (Input::key_map.contains(converted_key)) {

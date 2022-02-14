@@ -10,15 +10,12 @@
 
 
 
-namespace Sellas {
+namespace Liver {
 	TextureGL::~TextureGL() {
 		shutdown();
 	}
 	
-	/// <summary>
-	/// </summary>
-	/// <param name="texture_path">The relative path to the texture. 
-	/// This is currently relative to the texture_gl directory. </param>
+	// This is currently relative to the texture_gl directory.
 	// TODO(devon): Create a assets directory path to rebase the relative path.
 	void TextureGL::initialize(const char* texture_path) {
 		i32 width;
@@ -37,7 +34,7 @@ namespace Sellas {
 		);
 
 		if (!data) {
-			std::cout << "[Sellas][Texture][GL] ERROR: Failed to load texture! \n\tPATH: " << texture_path << "\n";
+			std::cout << "[Liver][Texture][GL] ERROR: Failed to load texture! \n\tPATH: " << texture_path << "\n";
 			return;
 		}
 		

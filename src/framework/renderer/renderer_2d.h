@@ -3,7 +3,7 @@
 #include "../core/common.h"
 #include "../core/camera.h"
 
-namespace Sellas {
+namespace Liver {
 	class RendererBackend;
 
 	class Renderer2D {

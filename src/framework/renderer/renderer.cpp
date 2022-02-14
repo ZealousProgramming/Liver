@@ -1,13 +1,13 @@
 #include "renderer.h"
 #include "renderer_2d.h"
 
-namespace Sellas {
+namespace Liver {
 
 	bool Renderer::initialize() {
-		std::cout << "[Sellas][Renderer] Initializing..\n";
+		std::cout << "[Liver][Renderer] Initializing..\n";
 		
 		if (!Renderer2D::initialize()) {
-			std::cout << "[Sellas][Renderer] ERROR: Renderer failed to initialize!\n";
+			std::cout << "[Liver][Renderer] ERROR: Renderer failed to initialize!\n";
 			return false;
 		}
 
@@ -15,7 +15,7 @@ namespace Sellas {
 	}
 	
 	void Renderer::shutdown() {
-		std::cout << "[Sellas][Renderer] Shutting down..\n";
+		std::cout << "[Liver][Renderer] Shutting down..\n";
 		Renderer2D::shutdown();
 	}
 

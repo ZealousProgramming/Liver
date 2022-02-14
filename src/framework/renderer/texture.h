@@ -2,7 +2,7 @@
 
 #include "../core/common.h"
 
-namespace Sellas {
+namespace Liver {
 	/**
 	* Public GSDK-agnostic interface for textures.
 	*/

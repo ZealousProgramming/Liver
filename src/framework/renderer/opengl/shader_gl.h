@@ -2,7 +2,7 @@
 
 #include "../../core/common.h"
 
-namespace Sellas {
+namespace Liver {
 	class ShaderGL {
 		public:
 			ShaderGL() = default;

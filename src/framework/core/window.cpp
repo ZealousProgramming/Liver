@@ -4,7 +4,7 @@
 #include <GLFW/glfw3.h>
 
 
-namespace Sellas {
+namespace Liver {
 
 	bool Window::initialize() {
 		native_window = glfwCreateWindow((int)width, (int)height, title, NULL, NULL);
@@ -17,7 +17,7 @@ namespace Sellas {
 		glfwMakeContextCurrent(native_window);
 
 		if(!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)){
-			std::cout << "[Sellas][Window]: GLAD initialization failed" << "\n";
+			std::cout << "[Liver][Window]: GLAD initialization failed" << "\n";
 			return false;
 		}
 
@@ -39,12 +39,14 @@ namespace Sellas {
 	void Window::set_size(const i16 new_width, const i16 new_height) {
 		width = new_width;
 		height = new_height;
+
+		glfwSetWindowSize(native_window, new_width, new_height);
 	}
 
 	void Window::change_title(const char* new_title) {
 		title = new_title;
 
-		// TODO(devon): Update the actual window frame
+		glfwSetWindowTitle(native_window, new_title);
 	}
 
 }

@@ -1,7 +1,7 @@
 #include "renderer_2d.h"
 #include "opengl/backend_gl.h"
 
-namespace Sellas {
+namespace Liver {
 
 	// TODO(devon): Run an ifdef for the Graphics API defines
 	RendererBackend* Renderer2D::backend = new RendererGL();
@@ -9,7 +9,7 @@ namespace Sellas {
 	bool Renderer2D::initialize() {
 
 		if (!Renderer2D::backend->initialize()) {
-			std::cout << "[Sellas][Renderer2D] ERROR: Backend failed to initialize!\n";
+			std::cout << "[Liver][Renderer2D] ERROR: Backend failed to initialize!\n";
 			return false;
 		}
 

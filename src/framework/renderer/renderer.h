@@ -4,7 +4,7 @@
 #include "renderer_backend.h"
 #include "../core/camera.h"
 
-namespace Sellas {
+namespace Liver {
 	/**
 	* Platform agnostic interface for the renderer
 	* 

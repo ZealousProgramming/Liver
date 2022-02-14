@@ -3,7 +3,7 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
-namespace Sellas {
+namespace Liver {
 	// TODO(devon): Remove once file handling is up and running
 	const char* vertex_shader_source = 
 		"#version 460 core\n"
@@ -66,7 +66,7 @@ namespace Sellas {
 
 		if (!source_result) {
 			glGetShaderInfoLog(handle, LOG_BUFFER_SIZE, NULL, source_log);
-			std::cout << "[Sellas][Renderer][Shader][GL] ERROR: " << shader_type_to_string(shader_type) << " failed to COMPILE!\n" << source_log << "\n";
+			std::cout << "[Liver][Renderer][Shader][GL] ERROR: " << shader_type_to_string(shader_type) << " failed to COMPILE!\n" << source_log << "\n";
 			return false;
 		}
 

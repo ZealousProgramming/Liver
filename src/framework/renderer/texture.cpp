@@ -3,7 +3,7 @@
 #include "renderer_backend.h"
 #include "opengl/texture_gl.h"
 
-namespace Sellas {
+namespace Liver {
 
 	Option<Ref<Texture>> Texture::create_texture() {
 		switch (RendererBackend::GetBackend()) {

@@ -2,7 +2,7 @@
 
 #include "../renderer_backend.h"
 
-namespace Sellas {
+namespace Liver {
 	class ShaderProgramGL;
 		
 	class RendererGL : public RendererBackend {

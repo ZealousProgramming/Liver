@@ -3,7 +3,7 @@
 #include "../../core/common.h"
 #include "../../core/math/math.h"
 
-namespace Sellas {
+namespace Liver {
 
 	using ShaderHandle = u32;
 

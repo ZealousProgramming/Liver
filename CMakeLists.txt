@@ -3,7 +3,7 @@
 #
 cmake_minimum_required (VERSION 3.16)
 
-project ("SellasSandbox" LANGUAGES CXX C)
+project ("LiverSandbox" LANGUAGES CXX C)
 set(CMAKE_CXX_STANDARD 20)
 #set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++20")
 
@@ -13,7 +13,7 @@ add_compile_options(-DWall )
 # Append all project includes
 set(includes
 	# Framework
-	"src/framework/sellas.h"
+	"src/framework/liver.h"
 	# --- Core
 	"src/framework/core/common.h"
 	"src/framework/core/window.h"
@@ -120,20 +120,20 @@ set(test_sources
 add_subdirectory("src/framework/vendor/googletest")
 include_directories("${gtest_SOURCE_DIR}/include" "${gtest_SOURCE_DIR}")
 
-add_executable(sellas_tests ${includes} ${sources} ${test_sources})
+add_executable(liver_tests ${includes} ${sources} ${test_sources})
 
-target_precompile_headers(sellas_tests PUBLIC "src/framework/pch.h")
-target_include_directories(sellas_tests
+target_precompile_headers(liver_tests PUBLIC "src/framework/pch.h")
+target_include_directories(liver_tests
 	PUBLIC
 		"src/framework/vendor/glfw/include"
 		"src/framework/vendor/glad/include"
 		"src/framework/vendor/glm"
 )
-target_link_libraries(sellas_tests 
+target_link_libraries(liver_tests 
 	${libs}
 	gtest
 	gtest_main
 )
 
 
-add_test(NAME "sellas_testing" COMMAND sellas_tests)
+add_test(NAME "liver_testing" COMMAND liver_tests)

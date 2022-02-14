@@ -1,5 +1,5 @@
 #include "renderer_backend.h"
 
-namespace Sellas {
+namespace Liver {
 	RendererBackend::BackendAPI RendererBackend::backend = RendererBackend::BackendAPI::OPEN_GL;
 }

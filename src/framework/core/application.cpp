@@ -8,7 +8,7 @@
 #include <GLFW/glfw3.h>
 
 
-namespace Sellas {
+namespace Liver {
 
 	// --- Forward Declarations
 	void framebuffer_resize_callback(GLFWwindow* window_inst, int width, int height);
@@ -17,31 +17,31 @@ namespace Sellas {
 	Application* Application::instance = nullptr;
 
 	bool Application::initialize(const char* window_title, const i16 window_width, const i16 window_height) {
-		std::cout << "[Sellas][Application] Initializing..\n";
+		std::cout << "[Liver][Application] Initializing..\n";
 
 		if (on_enter_fn == nullptr) {
-			std::cout << "[Sellas][Application] ERROR: Application Enter Function never assigned!\n";
+			std::cout << "[Liver][Application] ERROR: Application Enter Function never assigned!\n";
 			return false;
 		}
 
 		if (on_exit_fn == nullptr) {
-			std::cout << "[Sellas][Application] ERROR: Application Exit Function never assigned!\n";
+			std::cout << "[Liver][Application] ERROR: Application Exit Function never assigned!\n";
 			return false;
 		}
 
 		if (on_tick_fn == nullptr) {
-			std::cout << "[Sellas][Application] ERROR: Application Tick Function never assigned!\n";
+			std::cout << "[Liver][Application] ERROR: Application Tick Function never assigned!\n";
 			return false;
 		}
 
 		if (on_render_fn == nullptr) {
-			std::cout << "[Sellas][Application] ERROR: Application Render Function never assigned!\n";
+			std::cout << "[Liver][Application] ERROR: Application Render Function never assigned!\n";
 			return false;
 		}
 
 		// Initialize GLFW
 		if (!glfwInit()) {
-			std::cout << "[Sellas][Application] ERROR: GLFW failed to initialize!\n";
+			std::cout << "[Liver][Application] ERROR: GLFW failed to initialize!\n";
 			return false;
 		}
 
@@ -53,13 +53,13 @@ namespace Sellas {
 		//window = new Window(window_title, window_width, window_height);
 
 		if (!window->initialize()) {
-			std::cout << "[Sellas][Application] ERROR: Window failed to initialize!\n";
+			std::cout << "[Liver][Application] ERROR: Window failed to initialize!\n";
 			return false;
 		}
 
 
 		if (!Renderer::initialize()) {
-			std::cout << "[Sellas][Application] ERROR: Renderer failed to initialize!\n";
+			std::cout << "[Liver][Application] ERROR: Renderer failed to initialize!\n";
 			return false;
 		}
 	
@@ -84,7 +84,7 @@ namespace Sellas {
 		window.release();
 		//delete window;
 
-		std::cout << "[Sellas][Application] Shutting down..\n";
+		std::cout << "[Liver][Application] Shutting down..\n";
 		glfwTerminate();
 	}
 
@@ -116,22 +116,16 @@ namespace Sellas {
 		on_exit_fn();
 	}
 
-	void Application::setup_lifecycle_events(
-		Func<void()> enter_fn, 
-		Func<void()> exit_fn, 
-		Func<void(f32)> tick_fn,
-		Func<void(f32)> render_fn
-	) {
+	void Application::setup_lifecycle_events(std::function<void()> enter_fn, std::function<void()> exit_fn, std::function<void(f32)> tick_fn, std::function<void(f32)> render_fn) 	{
 		on_enter_fn = enter_fn;
 		on_exit_fn = exit_fn;
 		on_tick_fn = tick_fn;
 		on_render_fn = render_fn;
 	}
 	
-	
 	void framebuffer_resize_callback(GLFWwindow* window_inst, int width, int height) {
 		//window->set_size((i16)width, (i16)height);
-		Sellas::Renderer::on_resize( 0, 0, width, height);
+		Liver::Renderer::on_resize( 0, 0, width, height);
 	}
 }
 

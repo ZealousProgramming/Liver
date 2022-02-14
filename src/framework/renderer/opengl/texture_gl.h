@@ -3,7 +3,7 @@
 #include "../../core/common.h"
 #include "../texture.h"
 
-namespace Sellas {
+namespace Liver {
 	/**
 	* Internal represenation of a texture for OpenGL
 	*/

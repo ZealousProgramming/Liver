@@ -5,7 +5,7 @@
 #include <GLFW/glfw3.h>
 
 
-namespace Sellas {
+namespace Liver {
 	void ShaderProgramGL::initialize() {
 		handle = glCreateProgram();
 	}
@@ -33,7 +33,7 @@ namespace Sellas {
 
 		if (!link_result) {
 			glGetProgramInfoLog(handle, LOG_BUFFER_SIZE, NULL, link_log);
-			std::cout << "[Sellas][Renderer][Shader][GL] ERROR: Shader program failed to LINK!\n";
+			std::cout << "[Liver][Renderer][Shader][GL] ERROR: Shader program failed to LINK!\n";
 		}
 		
 	}

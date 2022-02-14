@@ -5,7 +5,7 @@
 
 #include <GLFW/glfw3.h>
 
-namespace Sellas {
+namespace Liver {
 	enum class InputState {
 		NEUTRAL = 3,
 		PRESSED = GLFW_PRESS,

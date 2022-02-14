@@ -2,7 +2,7 @@
 #include <glm/gtc/quaternion.hpp>
 #include <glm/gtx/quaternion.hpp>
 
-namespace Sellas {
+namespace Liver {
 
 	Transform::Transform() {
 		translation = glm::mat4(1.0f);
@@ -48,5 +48,16 @@ namespace Sellas {
 		scalar = glm::scale(glm::mat4(1.0f), scalar_vector);
 	}
 
+	const glm::vec3 Transform::get_forward() const {
+		return glm::vec3(rotation[0][2], rotation[1][2], rotation[2][2]);
+	}
+
+	const glm::vec3 Transform::get_right() const {
+		return glm::vec3(rotation[0][0], rotation[1][0], rotation[2][0]);
+	}
+
+	const glm::vec3 Transform::get_up() const {
+		return glm::vec3(rotation[0][1], rotation[1][1], rotation[2][1]);
+	}
 
 }
